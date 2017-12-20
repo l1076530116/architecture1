@@ -1,0 +1,1 @@
+alert("in customermgr a.js");

@@ -1,0 +1,1 @@
+alert("in goods a.js");
