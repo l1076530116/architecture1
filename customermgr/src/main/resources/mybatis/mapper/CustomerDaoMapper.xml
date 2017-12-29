@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.lb.architecture1.customermgr.dao.CustomerDao" >
 
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
 	<insert id="create" parameterType="CustomerModel" >
         insert into tb1_customer(customerId,pwd,showName,trueName,registerTime)
         values (#{customerId},#{pwd},#{showName},#{trueName},#{registerTime})
@@ -17,7 +19,7 @@
         delete from tb1_customer where uuid = #{uuid}
     </delete>
 
-    <select id="getByUuid" parameterType="Integer" resultType="CustomerModel">
+    <select id="getByUuid" parameterType="Integer" resultType="CustomerModel" useCache="true">
         select * from tb1_customer where uuid = #{uuid}
     </select>
 
@@ -27,10 +29,10 @@
             <if test="uuid != null &amp;&amp; uuid > 0">
                 and uuid = #{uuid}
             </if>
-            <if test="customerId != null ">
+            <if test="customerId != null &amp;&amp; customerId != ''">
                 and customerId = #{customerId}
             </if>
-            <if test="showName != null ">
+            <if test="showName != null &amp;&amp; showName != ''">
                 and showName = #{showName}
             </if>
         </where>

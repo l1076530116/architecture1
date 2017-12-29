@@ -1,20 +1,14 @@
 package com.lb.architecture1.customermgr.vo;
 
-public class CustomerModel {
-    private Integer uuid;
+import com.lb.architecture1.common.vo.BaseModel;
+
+public class CustomerModel extends BaseModel {
+
     private String customerId;
     private String pwd;
     private String showName;
     private String trueName;
     private String registerTime;
-
-    public Integer getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(Integer uuid) {
-        this.uuid = uuid;
-    }
 
     public String getCustomerId() {
         return customerId;
@@ -56,25 +50,11 @@ public class CustomerModel {
         this.registerTime = registerTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CustomerModel that = (CustomerModel) o;
-
-        return uuid.equals(that.uuid);
-    }
-
-    @Override
-    public int hashCode() {
-        return uuid.hashCode();
-    }
 
     @Override
     public String toString() {
         return "CustomerModel{" +
-                "uuid=" + uuid +
+                "uuid=" + getUuid() +
                 ", customerId='" + customerId + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", showName='" + showName + '\'' +

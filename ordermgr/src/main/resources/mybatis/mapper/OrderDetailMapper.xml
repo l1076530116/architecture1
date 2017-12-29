@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.lb.architecture1.ordermgr.dao.OrderDetailDao">
+     <insert id="create" parameterType="OrderDetailModel">
+     	insert into tb1_orderdetail (orderUuid,goodsUuid,orderNum,price,money,saveMoney)
+     	 values(#{orderUuid},#{goodsUuid},#{orderNum},#{price},#{money},#{saveMoney})
+     </insert>
+     <update id="update" parameterType="OrderDetailModel">
+     	update tb1_orderdetail set orderUuid=#{orderUuid},goodsUuid=#{goodsUuid},orderNum=#{orderNum},price=#{price},money=#{money},saveMoney=#{saveMoney}
+     	   	where uuid=#{uuid}
+     </update>
+     <delete id="delete" parameterType="int">
+     	delete from tb1_orderdetail where uuid=#{uuid}
+     </delete>
+
+    <select id="getByUuid" parameterType="int" resultType="OrderDetailModel">
+        select * from tb1_orderdetail where uuid=#{uuid}
+    </select>
+    <select id="getByConditionPage" parameterType="OrderDetailQueryModel" resultType="OrderDetailModel">
+        select * from tb1_orderdetail
+        <where>
+        	<if test="uuid!=null &amp;&amp; uuid > 0">
+        		and uuid=#{uuid}
+        	</if>  
+        	<if test="orderUuid!=null &amp;&amp; orderUuid > 0">
+        		and orderUuid=#{orderUuid}
+        	</if>
+
+        </where>
+    </select> 
+</mapper>
